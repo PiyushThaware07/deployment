@@ -14,7 +14,10 @@ app.get("/", (req, res) => {
     res.send("server started");
 })
 app.get("/all", (req, res) => {
-    res.send("all products routes");
+    res.json({
+        success:true,
+        data:"all route"
+    });
 })
 
 const port = process.env.PORT;
