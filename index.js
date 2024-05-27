@@ -10,7 +10,6 @@ const bodyParser = require('body-parser');
 // middleware
 app.use(cors());
 app.use(morgan("dev"));
-app.use(express.json());
 app.use(bodyParser.json({ limit: '200mb' }));
 app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 
@@ -32,14 +31,22 @@ app.get("/all", async (req, res) => {
     });
 })
 
-app.post("/all",async (req,res)=>{
-    const payload = req.body;
-    const newRecord = await PropertyModel(payload);
-    const savedRecord = await newRecord.save();
-    res.json({
-        success: true,
-        data: savedRecord
-    });
+app.post("/all", async (req, res) => {
+    try {
+        const payload = req.body;
+        const newRecord = await PropertyModel(payload);
+        const savedRecord = await newRecord.save();
+        res.json({
+            success: true,
+            data: savedRecord
+        });
+    }
+    catch (error) {
+        res.json({
+            success: false,
+            data: error.message
+        });
+    }
 })
 
 const port = process.env.PORT;
