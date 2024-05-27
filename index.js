@@ -4,11 +4,14 @@ const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
 require("./db/dbConnect");
+const bodyParser = require('body-parser');
 
 // middleware
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(bodyParser.json({ limit: '200mb' }));
+app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 
 // routes
 app.get("/", (req, res) => {
