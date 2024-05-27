@@ -10,10 +10,7 @@ app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
-    res.status(200).json({
-        success: true,
-        data: "Server Started Successfully"
-    })
+    res.status(200).send("server started")
 })
 app.get("/all", (req, res) => {
     res.status(200).json({
