@@ -6,6 +6,7 @@ require("dotenv").config();
 require("./db/dbConnect");
 const bodyParser = require('body-parser');
 
+
 // middleware
 app.use(cors());
 app.use(morgan("dev"));
