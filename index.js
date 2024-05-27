@@ -12,7 +12,10 @@ app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
-    res.send("server started");
+    res.json({
+        success: true,
+        data: "server started successfully"
+    });
 })
 
 
@@ -22,6 +25,16 @@ app.get("/all", async (req, res) => {
     res.json({
         success: true,
         data: data
+    });
+})
+
+app.post("/all",async (req,res)=>{
+    const payload = req.body;
+    const newRecord = await PropertyModel(payload);
+    const savedRecord = await newRecord.save();
+    res.json({
+        success: true,
+        data: savedRecord
     });
 })
 
