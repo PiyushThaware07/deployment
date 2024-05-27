@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
+require("dotenv").config();
 
 // middleware
 app.use(cors());
@@ -10,16 +11,13 @@ app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
-    res.status(200).send("server started")
+    res.send("server started");
 })
 app.get("/all", (req, res) => {
-    res.status(200).json({
-        success: true,
-        data: "all posts"
-    })
+    res.send("all products routes");
 })
 
-const port = 3000;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log("Server started successfully <---");
 })
