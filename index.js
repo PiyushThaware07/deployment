@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
+require("./db/dbConnect");
 
 // middleware
 app.use(cors());
@@ -13,10 +14,14 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("server started");
 })
-app.get("/all", (req, res) => {
+
+
+const PropertyModel = require("./db/model/PropertyModel");
+app.get("/all", async (req, res) => {
+    const data = await PropertyModel.find();
     res.json({
-        success:true,
-        data:"all route"
+        success: true,
+        data: data
     });
 })
 
